@@ -25,14 +25,14 @@ The Django Music App is a web application built using the Django framework, desi
 
 # To run MusicBeats locally:
 
-1.Clone this repository.
-2.Install Python and Django.
-3.Install dependencies: pip install -r requirements.txt.
-4.Navigate to the project directory.
-5.Start the Django server: python manage.py runserver.
-6.Access the app at http://localhost:8000 in your browser.
+1. Clone this repository.
+2. Install Python and Django.
+3. Install dependencies: pip install -r requirements.txt.
+4. Navigate to the project directory.
+5. Start the Django server: python manage.py runserver.
+6. Access the app at http://localhost:8000 in your browser.
 
 # Usage
-1.Browse songs, search for tracks, and discover golden hits without logging in.
-2.Sign up to unlock personalized features like creating playlists and receiving recommendations.
-3.Listen to songs and download MP3 files hassle-free.
+1. Browse songs, search for tracks, and discover golden hits without logging in.
+2. Sign up to unlock personalized features like creating playlists and receiving recommendations.
+3. Listen to songs and download MP3 files hassle-free.
