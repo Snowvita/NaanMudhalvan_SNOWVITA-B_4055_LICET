@@ -1,0 +1,55 @@
+{% extends 'musicbeats/basic.htm' %}
+{% block title %}Login{% endblock %}
+
+{% block body %}
+
+<style>
+    body {
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* Light text color */
+        font-family: 'Roboto', sans-serif; /* Custom font */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+
+    .container {
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* Light text color */
+        padding-top: 2%; /* Add top padding */
+    }
+
+    .card-body {
+        color: #ffffff; /* Light text color */
+    }
+</style>
+
+<h2 style="text-align: center; padding-top: 2%; color: #FF0000;">Channel: {{channel.name}}</h2>
+
+<div class="container">
+    {% for i in song reversed %}
+    <div class="card mb-3" style="max-width: 940px; padding-top: 0%; background-color: #333333;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{i.image}}" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #4CAF50; font-weight: 550;">{{i.name}}</h5>
+                    <p class="card-text" style="color: #FFFFFF;">Tags: {{i.tags}}</p>
+                    <p class="card-text" style="color: #FFFFFF;">Movie: {{i.movie}}</p>
+                    {% if user.is_authenticated %}
+                    <form action="/musicbeats/history" method="POST">{% csrf_token %}
+                        <input type="hidden" name="music_id" value="{{i.song_id}}">
+                        <a href="/musicbeats/songs/{{i.song_id}}"><button class="btn btn-outline-danger">Listen Song</button></a>
+                    </form>
+                    {% else %}
+                    <a href="/musicbeats/songs/{{i.song_id}}"><button class="btn btn-outline-danger">Listen Song</button></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'musicbeats/basic.htm' %}
+{% block title %}All Songs{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        background-color: #000000; /* Black */
+    }
+    .container {
+        background-color: #121212;
+        padding-top: 0;
+        margin: auto; /* Center horizontally */
+        max-width: 940px; /* Limit maximum width */
+    }
+    .swal2-popup {
+        background-color: #121212 !important;
+        color: #ffffff !important;
+    }
+    .swal2-title {
+        color: #4caf50 !important;
+    }
+</style>
+
+{% if message %}
+<script>
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: '{{message}}',
+        showConfirmButton: false,
+        timer: 1500
+    })
+</script>
+{% endif %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" style="padding-top: 3%;">
+            <img src="{{song.image}}" alt="" height="250px" width="350px">
+        </div>
+        <div class="col-md-6">
+            <h2 style="padding-top: 6%; font-weight: 550; color: #4caf50;">Title: {{song.name}}</h2>
+            <h5 style="padding-top: 2%; font-weight: 550; color: #ffffff;">Category: {{song.tags}}</h5>
+            <h5 style="padding-top: 2%; font-weight: 550; color: #ffffff;">Movie: {{song.movie}}</h5>
+            <h5 style="padding-top: 2%; font-weight: 550; color: #ffffff;">Singer: {{song.singer}}</h5>
+            <h5 style="padding-top: 2%; font-weight: 550; color: #ffffff;">Credit: <a href="{{song.credit}}" target="blank_" style="color: #4caf50;">Click here</a></h5>
+
+            <audio controls style="padding-top: 2%;">
+                <source src="/media/{{song.song}}" type="audio/mp3">
+            </audio>
+
+            <div style="padding-top: 2%;">
+                <div class="row" style="padding-left: 3%;">
+                    <form action="/musicbeats/watchlater" method="POST">{% csrf_token %}
+                        <input type="hidden" name="video_id" value="{{song.song_id}}">
+                        <button type="submit" class="btn btn-outline-danger" id="submit_btn">Add to Listen Later</button>
+                    </form>
+                    <a download href="/media/{{song.song}}" style="padding-left: 1%;"><button class="btn btn-outline-danger">Download Song</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
+
+{% endblock %}
+{% block js %}
+
+{% endblock %}

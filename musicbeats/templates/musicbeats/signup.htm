@@ -1,0 +1,157 @@
+{% extends 'musicbeats/basic.htm' %}
+{% block title %}SignUp{% endblock %}
+
+{% block body %}
+
+<style>
+    body {
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* Light text color */
+        font-family: 'Roboto', sans-serif; /* Custom font */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 91.5vh;
+    }
+    h1 {
+        text-align: center; 
+        color: #e0e0e0; /* Light grayish heading color */
+        margin-bottom: 10px; /* Add margin-bottom */
+        font-family:'Times New Roman', Times, serif;
+        font-weight: bold;
+        font-size: 30px;
+    }
+    .signup-form {
+        width: 450px; /* Adjusted width */
+        padding: 20px;
+        background-color: #333333; /* Dark background */
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3); /* Soft shadow effect */
+    }
+    .form-group {
+        margin-bottom: 3px;
+        display: flex;
+        flex-direction: column;
+    }
+    .form-group label {
+        font-weight: bold;
+        color: #ffffff;
+        font-size: 14px; /* Reddish-orange label color */
+        margin-bottom: 2px;
+    }
+    .form-control {
+        width: 100%;
+        border: 1px solid #555555; /* Dark border color */
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #aaaaaa; /* Dark background */
+        color: #3b3b3b; /* Light text color */
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Transition effect */
+        box-shadow: 0px 3px 5px rgba(255, 255, 255, 0.1); /* Shadow effect with white */
+    }
+    .form-control:focus {
+        background-color: #aaaaaa; /* Darker background on focus */
+        color: #333333; /* Light text color on focus */
+        outline: none;
+    }
+    .form-control::placeholder {
+        font-size: 0.9em; /* Smaller font size for placeholder */
+        color: #444444; /* Lighter placeholder color */
+    }
+    .btn-primary {
+        margin-top: 10px;
+        width: 100%;
+        background-color: #c62f48; /* Brownish button color */
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        color: #ffffff; /* Light text */
+        font-weight: bold;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+    .btn-primary:hover {
+        background-color: #941c30; /* Darker brownish color on hover */
+    }
+    .btn-primary:focus {
+        outline: none; /* Remove focus outline */
+        box-shadow: none;
+    }
+    .logo {
+        margin-bottom: 3px;
+        display: flex;
+        justify-content: center; /* Center horizontally */
+    }
+    .logo img {
+        width: 100px; /* Adjust logo size */
+    }
+</style>
+
+<script>
+    function validateSignupForm() {
+        var email = document.getElementById("exampleInputEmail1").value.trim();
+        var username = document.getElementById("exampleInputUsername").value.trim();
+        var firstName = document.getElementById("exampleInputFirstName").value.trim();
+        var lastName = document.getElementById("exampleInputLastName").value.trim();
+        var password1 = document.getElementById("exampleInputPassword1").value.trim();
+        var password2 = document.getElementById("exampleInputPassword2").value.trim();
+
+        if (email === "" || username === "" || firstName === "" || lastName === "" || password1 === "" || password2 === "") {
+            alert("Please fill in all fields.");
+            return false; // Prevent form submission
+        }
+
+        if (password1 !== password2) {
+            alert("Passwords do not match.");
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission
+    }
+</script>
+
+<div class="container">
+    <div class="signup-form">
+        <h1>Sign Up</h1>
+        <div class="logo">
+            <img src="/static/musicbeats/signup.png" alt="Logo"> <!-- Placeholder logo image -->
+        </div>
+        <!-- Your existing form content -->
+        <form action="/musicbeats/signup" method="POST" onsubmit="return validateSignupForm();">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="name@example.com" name="email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername">Username</label>
+                <input type="text" class="form-control" id="exampleInputUsername" name="username">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFirstName">First Name</label>
+                <input type="text" class="form-control" id="exampleInputFirstName" name="firstname">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputLastName">Last Name</label>
+                <input type="text" class="form-control" id="exampleInputLastName" name="lastname">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter at least 8 characters" name="pass1">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword2">Password (again)</label>
+                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm password" name="pass2">
+            </div>
+            <div style="padding-top: 2%;">
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

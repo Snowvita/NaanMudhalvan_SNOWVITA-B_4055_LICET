@@ -1,0 +1,132 @@
+{% extends 'musicbeats/basic.htm' %}
+{% block title %}Upload Your Music{% endblock %}
+
+{% block body %}
+
+<style>
+    body {
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* Light text color */
+        font-family: 'Roboto', sans-serif; /* Custom font */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 91.5vh;
+    }
+
+    h2 {
+        text-align: center;
+        padding-top: 2%;
+        margin-bottom: 20px;
+        color: #da1010; /* Red color */
+    }
+
+    .form-container {
+        width: 500px; /* Adjusted width */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        color: #ffffff; /* White text color */
+    }
+
+    .form-control {
+        width: 100%;
+        border: 1px solid #555555; /* Dark border color */
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #333333; /* Dark background */
+        color: #aaaaaa; /* Light text color */
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Transition effect */
+        box-shadow: 0px 3px 5px rgba(255, 255, 255, 0.1); /* Shadow effect */
+    }
+
+    .form-control:focus {
+        background-color: #555555; /* Darker background on focus */
+        color: #ffffff; /* Light text color on focus */
+        outline: none;
+    }
+
+    .form-control::placeholder {
+        font-size: 0.9em; /* Smaller font size for placeholder */
+        color: #888888; /* Lighter placeholder color */
+    }
+
+    .btn-primary {
+        width: 100%;
+        background-color: #c62f48; /* Brownish button color */
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        color: #ffffff; /* Light text */
+        font-weight: bold;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #941c30; /* Darker brownish color on hover */
+    }
+
+    .btn-primary:focus {
+        outline: none; /* Remove focus outline */
+    }
+</style>
+
+<h2>Upload Your Music</h2>
+
+<div class="container">
+    <div class="form-container">
+        <form action="/musicbeats/upload" enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="musicName">Your Music Name</label>
+                <input type="text" class="form-control" id="musicName" aria-describedby="musicNameHelp" name="name" placeholder="Your Song Name">
+            </div>
+
+            <div class="form-group">
+                <label for="singerName">Singer Name</label>
+                <input type="text" class="form-control" id="singerName" aria-describedby="singerNameHelp" name="singer" placeholder="Singer Name">
+            </div>
+
+            <div class="form-group">
+                <label for="tags">Tags</label>
+                <input type="text" class="form-control" id="tags" aria-describedby="tagsHelp" name="tag" placeholder="Tags (Seperate By Commas)">
+            </div>
+
+            <div class="form-group">
+                <label for="imageLink">Image Link</label>
+                <input type="text" class="form-control" id="imageLink" aria-describedby="imageLinkHelp" name="image" placeholder="Link to Image">
+            </div>
+
+            <div class="form-group">
+                <label for="movieName">Movie Name</label>
+                <input type="text" class="form-control" id="movieName" aria-describedby="movieNameHelp" name="movie" placeholder="Movie name in which this song is there">
+            </div>
+
+            <div class="form-group">
+                <label for="credit">Credit</label>
+                <input type="text" class="form-control" id="credit" aria-describedby="creditHelp" name="credit" placeholder="Add Credit Link">
+            </div>
+
+            <div class="form-group">
+                <label for="file">Example file input</label>
+                <input type="file" class="form-control-file" id="file" name="file">
+            </div>
+
+            <div style="padding-top: 3%; padding-bottom: 3%;">
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

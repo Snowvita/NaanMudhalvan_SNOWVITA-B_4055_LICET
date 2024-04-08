@@ -1,0 +1,122 @@
+{% extends 'musicbeats/basic.htm' %}
+{% block title %}Login{% endblock %}
+
+{% block body %}
+
+<style>
+    body {
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* Light text color */
+        font-family: 'Roboto', sans-serif; /* Custom font */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 91.5vh;
+    }
+    h1 {
+        text-align: center; 
+        color: #e0e0e0; /* Light grayish heading color */
+        margin-bottom: 30px; /* Add margin-bottom */
+        font-family:'Times New Roman', Times, serif;
+        font-weight: bold;
+    }
+    .login-form {
+        width: 350px; /* Adjusted width */
+        padding: 30px;
+        background-color: #333333; /* Dark background */
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3); /* Soft shadow effect with white */
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-control {
+        width: 100%;
+        border: 1px solid #555555; /* Dark border color */
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #ffffff; /* Dark background */
+        color: #000000; /* Light text color */
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Transition effect */
+        box-shadow: 0px 3px 5px rgba(255, 255, 255, 0.1); /* Shadow effect with white */
+    }
+    .form-control:focus {
+        background-color: #ffffff; /* Darker background on focus */
+        color: #000000; /* Light text color on focus */
+        outline: none;
+    }
+    .form-control::placeholder {
+        font-size: 0.9em; /* Smaller font size for placeholder */
+        color: #383838; /* Lighter placeholder color */
+    }
+    .btn-primary {
+        width: 100%;
+        background-color: #c62f48; /* Brownish button color */
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        color: #ffffff; /* Light text */
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+    .btn-primary:hover {
+        background-color: #941c30; /* Darker brownish color on hover */
+    }
+    .btn-primary:focus {
+        outline: none; /* Remove focus outline */
+        box-shadow: none;
+    }
+    .logo {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center; /* Center horizontally */
+    }
+    .logo img {
+        width: 80px; /* Adjust logo size */
+    }
+    label {
+        font-weight: bold;
+        color: #e0e0e0; /* Light grayish label color */
+    }
+</style>
+
+<script>
+    function validateLoginForm() {
+        var username = document.getElementById("exampleInputEmail1").value.trim();
+        var password = document.getElementById("exampleInputPassword1").value.trim();
+
+        if (username === "" || password === "") {
+            alert("Please enter your username and password.");
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission
+    }
+</script>
+
+<div class="container">
+    <div class="login-form">
+        <h1>Login</h1> <!-- Title for the login form -->
+        <div class="logo">
+            <img src="/static/musicbeats/login.jpg" alt="Logo"> <!-- Placeholder logo image -->
+        </div>
+        <form action="/musicbeats/login" method="POST" onsubmit="return validateLoginForm();">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username" placeholder="Your Username">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

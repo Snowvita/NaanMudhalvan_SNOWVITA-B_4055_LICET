@@ -1,0 +1,46 @@
+{% extends 'musicbeats/basic.htm' %}
+{% block title %}MusicBeats{% endblock %}
+
+{% block body %}
+{% load static %} 
+<style>
+    body {
+        background-color: #222;
+    }
+
+    h1 {
+        padding-top: 20px;
+    }
+    h3{
+      color:white;
+    }
+</style>
+
+<h1 class="text-center text-danger">History</h1>
+
+{% if history|length < 1 %}
+    <h3 class="text-center pt-5">You have no Video in your Watch Later</h3>
+{% endif %}
+
+<div class="container">
+    {% for i in history reversed %}
+    <div class="card mb-3 bg-dark text-light">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{i.image}}" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title text-success">{{i.name}}</h5>
+                    <p class="card-text text-muted">Tags: {{i.tags}}</p>
+                    <p class="card-text text-muted">Movie: {{i.movie}}</p>
+                    <a href="/musicbeats/songs/{{i.song_id}}">
+                        <button class="btn btn-outline-danger">Listen Song</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
